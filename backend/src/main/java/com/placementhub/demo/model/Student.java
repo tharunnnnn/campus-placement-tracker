@@ -18,4 +18,7 @@ public class Student {
     private String batch;
     private Double cgpa;
     private String resumeLink;
+
+    @Column(columnDefinition = "TEXT")
+    private String skills;
 }

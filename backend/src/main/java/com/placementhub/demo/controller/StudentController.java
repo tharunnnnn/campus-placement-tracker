@@ -34,4 +34,19 @@ public class StudentController {
     public void deleteStudent(@PathVariable Long id) {
         studentRepository.deleteById(id);
     }
+
+    @GetMapping("/search")
+    public List<Student> searchStudents(
+            @RequestParam(required = false) String skill,
+            @RequestParam(required = false) String department,
+            @RequestParam(required = false) Double minCgpa) {
+
+        if (skill != null) {
+            return studentRepository.findBySkillsContainingIgnoreCase(skill);
+        }
+        if (department != null && minCgpa != null) {
+            return studentRepository.findByDepartmentAndCgpaGreaterThanEqual(department, minCgpa);
+        }
+        return studentRepository.findAll();
+    }
 }
