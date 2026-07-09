@@ -30,6 +30,12 @@ public class StudentController {
         return studentRepository.findById(id).orElse(null);
     }
 
+    @PutMapping("/{id}")
+    public Student updateStudent(@PathVariable Long id, @RequestBody Student updatedStudent) {
+        updatedStudent.setId(id);
+        return studentRepository.save(updatedStudent);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteStudent(@PathVariable Long id) {
         studentRepository.deleteById(id);
